@@ -11,10 +11,11 @@ generator client {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  username    String       @unique
-  items       Item[]
-  transactions Transaction[] @relation("userTransactions")
+  id                 Int           @id @default(autoincrement())
+  username           String        @unique
+  items              Item[]
+  transactionsFrom   Transaction[] @relation("transactionsFrom")
+  transactionsTo     Transaction[] @relation("transactionsTo")
 }
 
 model Item {
@@ -29,9 +30,9 @@ model Transaction {
   id          Int       @id @default(autoincrement())
   item        Item?     @relation(fields: [itemId], references: [id])
   itemId      Int?
-  from        User?     @relation("userTransactions", fields: [fromId], references: [id])
+  from        User?     @relation("transactionsFrom", fields: [fromId], references: [id])
   fromId      Int?
-  to          User?     @relation("userTransactions", fields: [toId], references: [id])
+  to          User?     @relation("transactionsTo", fields: [toId], references: [id])
   toId        Int?
   quantity    Int       @default(1)
   createdAt   DateTime  @default(now())
