@@ -1,0 +1,38 @@
+// Prisma schema file
+// SQLite database for development
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String       @unique
+  items       Item[]
+  transactions Transaction[] @relation("userTransactions")
+}
+
+model Item {
+  id          Int          @id @default(autoincrement())
+  name        String
+  owner       User?        @relation(fields: [ownerId], references: [id])
+  ownerId     Int?
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          Int       @id @default(autoincrement())
+  item        Item?     @relation(fields: [itemId], references: [id])
+  itemId      Int?
+  from        User?     @relation("userTransactions", fields: [fromId], references: [id])
+  fromId      Int?
+  to          User?     @relation("userTransactions", fields: [toId], references: [id])
+  toId        Int?
+  quantity    Int       @default(1)
+  createdAt   DateTime  @default(now())
+}

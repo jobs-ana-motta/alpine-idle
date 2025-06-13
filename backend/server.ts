@@ -1,6 +1,8 @@
 import fastify from 'fastify';
+import prismaPlugin from './plugins/prisma.js';
 
 const app = fastify({ logger: true });
+await app.register(prismaPlugin);
 
 app.get('/ping', async (_request, _reply) => {
   return { pong: 'it works!' };
