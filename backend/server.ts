@@ -3,6 +3,7 @@ import usersRoutes from './routes/users.js';
 import itemsRoutes from './routes/items.js';
 
 const app = fastify({ logger: true });
+await app.register(prismaPlugin);
 
 app.get('/ping', async (_request, _reply) => {
   return { pong: 'it works!' };

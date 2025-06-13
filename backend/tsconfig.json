@@ -8,5 +8,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["server.ts", "routes/**/*.ts"]
+  "include": ["server.ts", "plugins/**/*.ts"],
+  "files": ["plugins/prisma.d.ts"]
 }
