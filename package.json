@@ -1,0 +1,17 @@
+{
+  "name": "alpine-idle",
+  "version": "1.0.0",
+  "description": "Alpine Idle game project startup",
+  "private": true,
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "start:backend": "npm --prefix backend run start",
+    "start:frontend": "npm --prefix frontend run start",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "workspaces": ["backend", "frontend"],
+  "engines": {
+    "node": ">=22"
+  }
+}
