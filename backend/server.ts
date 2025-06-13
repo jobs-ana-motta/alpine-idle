@@ -1,10 +1,15 @@
 import fastify from 'fastify';
+import usersRoutes from './routes/users.js';
+import itemsRoutes from './routes/items.js';
 
 const app = fastify({ logger: true });
 
 app.get('/ping', async (_request, _reply) => {
   return { pong: 'it works!' };
 });
+
+app.register(usersRoutes);
+app.register(itemsRoutes);
 
 const start = async () => {
   try {
